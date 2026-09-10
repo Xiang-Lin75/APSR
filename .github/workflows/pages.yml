@@ -1,4 +1,4 @@
-name: Deploy project website
+name: Deploy audio demo
 on:
   push:
     branches: [main]

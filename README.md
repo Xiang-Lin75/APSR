@@ -1,53 +1,20 @@
-# APSR-P
+# APSR-P · Audio Demo
 
-**Enrollment-Anchored Memory and Progressive Refinement for Causal Target Speaker Extraction**
+[Open the demo website](https://xiang-lin75.github.io/APSR-P/)
 
-[Project website](https://Xiang-Lin75.github.io/APSR-P/)
+Compare **Enrollment · Mixture · APSR-P · Clean target** and switch between
+target A and B for the same mixture. The page is dedicated to listening, without
+benchmark tables, architecture diagrams or author biographies.
 
-Zi-Xiang Lin, Shao-Chun Hu, Jeih-Weih Hung, and Hung-Shin Lee  
-National Chi Nan University; National Taiwan Normal University
+The eight paired-target examples are prepared locally. **Public WSJ0 audio is
+pending confirmation of the applicable publication permissions**, so the live
+page currently shows an availability notice. No audio is included in this public
+release. Training/inference code and model weights are planned after acceptance.
 
-## Current release
+The layout follows the side-by-side spectrogram/player comparison in the
+[Universal Speech Enhancement Hybrid demo](https://nanless.github.io/universal-speech-enhancement-demo/#hybrid).
+No audio, figures, results or source code from that website are copied.
 
-This is the public research project page. Training/inference code, model weights,
-configurations and evaluation instructions are **planned for release after acceptance**.
-Audio examples are pending confirmation of the applicable WSJ0 publication terms.
-The initial public release contains the website, method diagrams and aggregate results.
-
-## Method
-
-APSR-P uses frequency-resolved enrollment anchors to guide a bounded causal
-memory's candidate, update rate and read gate. An enrollment-only stream progresses
-across shared refinement blocks while each block call maintains its own acoustic-time
-memory. The decoder reconstructs the target through complex masking.
-
-![APSR-P overview](site/assets/architecture.png)
-
-## Verified WSJ0-2mix result
-
-| SI-SDRi (dB) | SDRi (dB) | PESQ | eSTOI (%) | Target-confusion rate (%) |
-|---:|---:|---:|---:|---:|
-| 13.81 | 14.17 | 3.10 | 87.82 | 1.95 |
-
-Validation-selected P checkpoint E102, seed 43, four refinement rounds;
-6,000 target queries from 3,000 mixtures. SI-SDRi/SDRi subtract the corresponding
-mixture baseline for each query. TCR is 117/6,000. The model has 306,842 trainable
-parameters (312,986 registered); its documented 4-s mixture/3-s enrollment profile
-costs 4.923 G MAC/s. Remaining ablations and WHAM! results are pending.
-
-Neural operations are causal in STFT-frame order, with 16-ms centered-STFT analysis
-lookahead. Cached streaming and end-to-end real-time performance remain unverified.
-The planned listening examples use precomputed outputs.
-
-## Website
-
-For local preview: `python -m http.server 8766 --bind 127.0.0.1 --directory site`.
-Then open http://127.0.0.1:8766/.
-
-GitHub Pages deploys `site/` through the included Actions workflow. The comparison
-layout is informed by [Universal Speech Enhancement Demo](https://nanless.github.io/universal-speech-enhancement-demo/)
-and [LExt](https://zqwang7.github.io/demos/LExt_demo/index.html). Their audio, figures,
-results and source code are not copied.
-
-See [release plans](RELEASE_PLAN.md) and [data notice](DATA_NOTICE.md).
-`SHA256SUMS` records every file in the reviewed publication package except itself.
+To preview: `python -m http.server 8766 --bind 127.0.0.1 --directory site`, then
+open http://127.0.0.1:8766/. GitHub Actions deploys `site/` to GitHub Pages.
+See [data notice](DATA_NOTICE.md). `SHA256SUMS` binds every release file except itself.

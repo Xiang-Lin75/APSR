@@ -11,6 +11,7 @@ function makeTrack(id) {
   heading.textContent = trackLabels[id];
   const description = document.createElement("span");
   description.className = "track-description";
+  description.hidden = true;
   const image = document.createElement("img");
   image.loading = "lazy";
   image.alt = `${trackLabels[id]} spectrogram; 0–4 kHz from bottom to top`;
@@ -21,7 +22,7 @@ function makeTrack(id) {
   const audio = document.createElement("audio");
   audio.controls = true; audio.preload = "metadata";
   const download = document.createElement("a");
-  download.className = "download"; download.textContent = "Download excerpt";
+  download.className = "download"; download.textContent = "Download";
   figure.append(heading, description, image, axis, audio, download);
   allAudio.add(audio);
   return {figure, description, image, end, audio, download};
@@ -67,6 +68,7 @@ function makeExample(example, index) {
     audio.addEventListener("ended", () => { if (synchronizedTracks.has(id)) sharedTime = 0; });
     audio.addEventListener("error", () => {
       tracks[id].description.textContent = "Audio unavailable; please reload the page.";
+      tracks[id].description.hidden = false;
       tracks[id].figure.classList.add("unavailable");
     });
   });
@@ -75,13 +77,11 @@ function makeExample(example, index) {
     const query = example.queries.find(q => q.target === selectedTarget);
     const targetName = selectedTarget.toUpperCase();
     buttons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.target === selectedTarget)));
-    article.querySelector(".example-title").textContent = `Example ${String(index + 1).padStart(2, "0")} · Target ${targetName}`;
-    article.querySelector(".example-score").textContent = `Replay SI-SDRi ${query.replay_full_si_sdri.toFixed(2)} dB · full ${example.seconds.toFixed(2)} s utterance`;
+    article.querySelector(".example-title").textContent = `Example ${String(index + 1).padStart(2, "0")}`;
     Object.entries(tracks).forEach(([id, track]) => {
       const url = id === "mixture" ? example.mixture_audio : query[`${id}_audio`];
       const seconds = id === "enrollment" ? query.enrollment_excerpt_seconds : example.excerpt_seconds;
-      const descriptions = {enrollment: "Separate reference utterance", mixture: "Both speakers together", estimate: `Extracted target ${targetName}`, target: `Ground-truth target ${targetName}`};
-      track.description.textContent = descriptions[id];
+      track.description.hidden = true;
       track.image.src = url.replace(/^audio\//, "assets/tracks/").replace(/\.wav$/, ".png");
       track.end.textContent = `${seconds.toFixed(2)} s`;
       track.audio.setAttribute("aria-label", `Example ${index + 1}, target ${targetName}: ${trackLabels[id]}`);
@@ -90,11 +90,6 @@ function makeExample(example, index) {
       track.download.setAttribute("aria-label", `Download example ${index + 1} ${trackLabels[id]} excerpt`);
       track.figure.classList.remove("unavailable");
     });
-    article.querySelector(".trial-key").textContent = query.key;
-    article.querySelector(".utterance-length").textContent = `${example.seconds.toFixed(2)} s evaluated; ${example.excerpt_seconds.toFixed(2)} s excerpt`;
-    article.querySelector(".enrollment-length").textContent = `${query.enrollment_seconds.toFixed(2)} s used by the model; ${query.enrollment_excerpt_seconds.toFixed(2)} s excerpt`;
-    article.querySelector(".confusion").textContent = query.full_test_target_confusion ? "Yes" : "No";
-    article.querySelector(".aligned-spectra").href = query.spectrogram;
     revising = false;
   }
   buttons.forEach(button => button.addEventListener("click", () => {
