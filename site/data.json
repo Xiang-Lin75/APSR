@@ -1,0 +1,26 @@
+{
+  "model": "APSR-P",
+  "dataset": "WSJ0-2mix",
+  "sample_rate": 8000,
+  "checkpoint_epoch": 102,
+  "full_test_queries": 6000,
+  "full_test_mixtures": 3000,
+  "full_test_metrics": {
+    "estoi": 0.8781523847906253,
+    "interferer_si_sdr": -29.299412067649246,
+    "pesq": 3.1023844101826348,
+    "proj_sdr": 13.812867895055017,
+    "proj_sdr_i": 13.814019604431731,
+    "sdr": 14.316960312022589,
+    "sdr_i": 14.1659164305827,
+    "si_sdr": 13.813012037458389,
+    "si_sdr_i": 13.814164130314927,
+    "target_confusion_rate": 0.0195,
+    "target_margin_db": 43.112424105107635
+  },
+  "examples": [],
+  "audio_publication": {
+    "status": "pending",
+    "terms_confirmed": false
+  }
+}

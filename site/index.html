@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="APSR-P research project: enrollment-anchored memory and progressive refinement for causal target speaker extraction. Results, method, listening examples and release information.">
+  <title>APSR-P · Causal Target Speaker Extraction</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#listen">Skip to listening examples</a>
+  <header class="project-header">
+    <div class="wrap">
+      <p class="kicker">Research project · September 2026</p>
+      <h1>APSR-P: Enrollment-Anchored Memory<br class="desktop-break"> and Progressive Refinement</h1>
+      <p class="subtitle">for Causal Target Speaker Extraction</p>
+      <p class="authors">Zi-Xiang Lin · Shao-Chun Hu · Jeih-Weih Hung · Hung-Shin Lee</p>
+      <p class="affiliations">National Chi Nan University · National Taiwan Normal University</p>
+      <a class="repo-link" href="https://github.com/Xiang-Lin75/APSR-P">GitHub repository <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <div class="page-navigation"><nav class="wrap" aria-label="Contents"><a href="#introduction">Introduction</a><a href="#listen">Listening examples</a><a href="#results">Results</a><a href="#method">Method</a><a href="#release">Release information</a></nav></div>
+  <main class="wrap">
+    <section id="introduction" class="introduction">
+      <h2>Extract the speaker specified by a reference utterance.</h2>
+      <p>APSR-P extracts a target voice from overlapping speech. A separate enrollment utterance identifies the requested speaker. Frequency-resolved enrollment anchors guide a bounded causal memory, while an enrollment-only state progresses across shared refinement blocks.</p>
+      <p>This page accompanies the research project. Listening examples use precomputed outputs; the full-test results below are reported separately from individual examples.</p>
+    </section>
+
+    <section id="listen" aria-labelledby="listen-title">
+      <div class="section-heading"><div><p class="section-number">01 / Listening examples</p><h2 id="listen-title">WSJ0-2mix</h2></div><span class="section-tag">One mixture · Two target queries</span></div>
+      <p id="load-status" role="status">Loading listening-example availability…</p>
+      <div id="audio-pending" class="availability" hidden><h3>Listening examples are being prepared for public release.</h3><p>WSJ0 audio publication is pending confirmation of the applicable dataset permissions. Verified full-test results and the method are available below.</p><a href="#results">View the benchmark results <span aria-hidden="true">↓</span></a></div>
+      <div id="listening-content" hidden>
+        <div class="listening-guide"><p><strong>How to compare.</strong> Listen to the enrollment first. Compare Mixture → APSR-P → Clean target, then choose target B to extract the other voice from the same mixture.</p><p><strong>Spectrograms.</strong> Frequency runs from 0 to 4 kHz, bottom to top. All panels share the same STFT-magnitude scale. Enrollment is a separate utterance; the other three tracks are time-aligned.</p><div class="scale"><span>−80 dB</span><span class="scale-bar" aria-label="Shared magnitude color scale"></span><span>−20 dB</span><span class="scale-label">Magnitude relative to 1</span></div></div>
+        <p id="local-status" class="local-status" hidden>Local research preview · WSJ0 audio publication remains pending.</p>
+        <nav id="example-index" class="example-index" aria-label="Jump to mixture example"></nav>
+        <div id="examples"></div>
+        <p class="selection-note">Eight mixtures were selected with a fixed random seed before checkpoint replay. Both target queries are retained. Scores shown with examples are for full utterances; playback uses the first up to 6 seconds, with up to 3 seconds of enrollment.</p>
+      </div>
+    </section>
+
+    <section id="results" aria-labelledby="results-title">
+      <div class="section-heading"><div><p class="section-number">02 / Full-test evaluation</p><h2 id="results-title">Benchmark results</h2></div><span class="section-tag">Validation-selected checkpoint · P E102</span></div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Benchmark results table"><table><thead><tr><th scope="col">Dataset</th><th scope="col">SI-SDRi ↑<span>dB</span></th><th scope="col">SDRi ↑<span>dB</span></th><th scope="col">PESQ ↑</th><th scope="col">eSTOI ↑<span>%</span></th><th scope="col">TCR ↓<span>%</span></th><th scope="col">Status</th></tr></thead><tbody><tr><th scope="row">WSJ0-2mix</th><td>13.81</td><td>14.17</td><td>3.10</td><td>87.82</td><td>1.95</td><td><span class="result-status">Verified</span></td></tr><tr><th scope="row">WHAM!</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Pending</td></tr></tbody></table></div>
+      <p class="table-note">WSJ0-2mix: 6,000 target queries from 3,000 mixtures; seed 43, four refinement rounds. SI-SDRi and SDRi subtract each query's mixture baseline. TCR is target-confusion rate: 117/6,000. Remaining ablations and WHAM! results will be added when verified.</p>
+    </section>
+
+    <section id="method" aria-labelledby="method-title">
+      <div class="section-heading"><div><p class="section-number">03 / Architecture</p><h2 id="method-title">Enrollment-anchored memory and shared refinement</h2></div></div>
+      <p>Shared encoders process the mixture and enrollment independently. Gated pooling forms frequency-resolved enrollment tokens. The separator combines frequency and temporal modeling, anchored memory and causal self-attention; the decoder predicts a complex mask for target reconstruction.</p>
+      <figure class="architecture"><a href="assets/architecture.png"><img src="assets/architecture.png" alt="APSR-P overview, shared encoders, decoder, and frequency, temporal and causal self-attention block details" loading="lazy"></a><figcaption>APSR-P overview and separator-block details. Open the figure to inspect it at full resolution.</figcaption></figure>
+      <details class="memory-detail"><summary>View the enrollment-anchored memory</summary><img src="assets/memory.png" alt="Enrollment anchor and projected mixture guide the update rate and bounded candidate; updated causal memory is gated, projected and added to the mixture feature" loading="lazy"><p>The anchor guides the candidate, update rate and read gate. Each block call initializes its own acoustic-time memory; readout uses the current updated state.</p></details>
+      <p class="method-scope"><strong>Model profile.</strong> 306,842 trainable parameters (312,986 registered); 4.923 G MAC/s for a 4-s mixture and 3-s enrollment. Neural operations are causal in STFT-frame order, with 16 ms of centered-STFT analysis lookahead. Cached streaming, complete output delay and real-time performance remain to be measured.</p>
+    </section>
+
+    <section id="release" aria-labelledby="release-title">
+      <div class="section-heading"><div><p class="section-number">04 / Reproducibility</p><h2 id="release-title">Release information</h2></div></div>
+      <div class="release-grid"><div><h3>Code and checkpoint</h3><p>Training and inference code, the validation-selected model weights, configurations and evaluation instructions are planned for release after acceptance. Updates will appear in the <a href="https://github.com/Xiang-Lin75/APSR-P">APSR-P repository</a>.</p></div><div><h3>Evaluation protocol</h3><p>The checkpoint was selected by validation SI-SDRi at epoch 102. Complete benchmark scores come from the verified test evaluation. Local example scores are recomputed from checkpoint replay; small numerical differences across environments are disclosed.</p></div><div><h3>Playback protocol</h3><p>Full mixture and enrollment utterances are used for inference. Mixture, both targets and both estimates share one gain to prevent clipping. Enrollment only receives peak reduction when needed. Playback-position sharing supports comparison; it is not a streaming-latency measurement.</p></div><div><h3>Data and presentation</h3><p>WSJ0 source material remains subject to its <a href="https://catalog.ldc.upenn.edu/LDC93S6A">original data-use terms</a> and is separate from any future code license. The comparison layout was informed by <a href="https://nanless.github.io/universal-speech-enhancement-demo/">Universal Speech Enhancement Demo</a> and the <a href="https://zqwang7.github.io/demos/LExt_demo/index.html">LExt demo</a>. No audio, figures or results from those sites are reused.</p></div></div>
+    </section>
+  </main>
+  <footer><div class="wrap"><strong>APSR-P</strong><span>Research project · September 2026</span><a href="https://github.com/Xiang-Lin75/APSR-P">GitHub ↗</a><a href="#introduction">Back to top ↑</a></div></footer>
+  <template id="example-template">
+    <article class="example">
+      <div class="example-heading"><div><h3 class="example-title"></h3><p class="example-score" aria-live="polite"></p></div><div class="target-switch" role="group"><span>Target speaker</span><button type="button" data-target="a" aria-pressed="true">A</button><button type="button" data-target="b" aria-pressed="false">B</button></div></div>
+      <div class="track-grid"></div>
+      <div class="playback-row"><span class="playback-description">Mixture, estimate and target share the playback position.</span><button type="button" class="restart">Reset this example ↺</button></div>
+      <details class="sample-details"><summary>Example details</summary><dl><dt>Trial key</dt><dd class="trial-key"></dd><dt>Full utterance</dt><dd class="utterance-length"></dd><dt>Enrollment</dt><dd class="enrollment-length"></dd><dt>Confusion on full test</dt><dd class="confusion"></dd></dl><a class="aligned-spectra" href="">Open aligned comparison spectrogram ↗</a></details>
+    </article>
+  </template>
+</body>
+</html>
