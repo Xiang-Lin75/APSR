@@ -57,6 +57,6 @@ It verifies checksums, query pairing, mixture-baseline subtraction, identity dec
 
 ## Listening demo
 
-The [demo website](https://xiang-lin75.github.io/APSR-P/) focuses on **Enrollment · Mixture · APSR-P · Clean target**, with A/B target switching for the same mixture. Public WSJ0 audio awaits confirmation of the applicable publication permissions; the live site currently shows an availability notice. See [data notice](DATA_NOTICE.md).
+The [demo website](https://xiang-lin75.github.io/APSR-P/) provides **eight paired-target listening examples** with **Enrollment · Mixture · APSR-P · Clean target**, spectrograms, and A/B target switching for the same mixture. Comparison excerpts are at most six seconds; enrollment excerpts are at most three seconds. Outputs were precomputed using E102. The authors confirmed the applicable permission for these short research-demo excerpts; see [data notice](DATA_NOTICE.md).
 
 The listening layout was informed by the [Universal Speech Enhancement Hybrid demo](https://nanless.github.io/universal-speech-enhancement-demo/#hybrid). GitHub Pages deploys only `site/`; the method figures, checkpoint links, and test artifacts remain in this repository.

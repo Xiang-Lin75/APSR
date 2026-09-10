@@ -1,13 +1,19 @@
 # Data notice
 
-The public release contains no WSJ0 audio or spectrograms derived from recordings.
-Publication of the prepared examples awaits confirmation against the research
-group's applicable WSJ0 agreement. A license to the original recordings is not
-granted by this website or by any future code license.
+This research demo presents eight WSJ0-2mix mixtures with both target queries.
+Each comparison signal is an excerpt of at most six seconds; each separate
+enrollment utterance is an excerpt of at most three seconds. The 56 audio files
+include the comparison tracks and precomputed APSR-P outputs. The authors
+confirmed that their applicable WSJ0 agreement permits publication of these
+short research-demo excerpts. This is not a release of the underlying corpus.
 
-The [WSJ0 catalog](https://catalog.ldc.upenn.edu/LDC93S6A) links an
-[LDC non-member agreement](https://catalog.ldc.upenn.edu/license/ldc-non-members-agreement.pdf)
-with a limited-excerpt provision for documents describing non-commercial research.
-The agreement does not establish a universal number of clips or seconds, and
-membership/corpus-specific terms may differ. Other public research demos do not
-establish permission for this project's audio release.
+Source: Garofolo, John S., et al. *CSR-I (WSJ0) Complete*, LDC93S6A,
+Linguistic Data Consortium, 1993.
+[Dataset and terms](https://catalog.ldc.upenn.edu/LDC93S6A).
+Portions are copyright 1987–1989 Dow Jones & Company, Inc., and
+1992, 1993 Trustees of the University of Pennsylvania.
+
+The recordings retain their original rights and are not licensed by a future
+APSR-P code license. The figures and model implementation are separate from
+the recordings. The site serves precomputed excerpts; it does not run or expose
+the model implementation.

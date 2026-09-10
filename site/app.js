@@ -100,7 +100,7 @@ function makeExample(example, index) {
   return article;
 }
 
-fetch("data.json").then(response => {
+fetch("data.json", {cache: "no-store"}).then(response => {
   if (!response.ok) throw new Error("Missing project manifest");
   return response.json();
 }).then(data => {

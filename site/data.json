@@ -3,8 +3,178 @@
   "dataset": "WSJ0-2mix",
   "sample_rate": 8000,
   "audio_publication": {
-    "status": "pending",
-    "terms_confirmed": false
+    "status": "published",
+    "terms_confirmed": true,
+    "confirmation_basis": "Applicable agreement confirmed by the authors for these short research-demo excerpts."
   },
-  "examples": []
+  "examples": [
+    {
+      "id": "example-01",
+      "mixture_audio": "audio/example-01-mixture.wav",
+      "excerpt_seconds": 6.0,
+      "queries": [
+        {
+          "target": "a",
+          "enrollment_audio": "audio/example-01-a-enrollment.wav",
+          "estimate_audio": "audio/example-01-a-estimate.wav",
+          "target_audio": "audio/example-01-a-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        },
+        {
+          "target": "b",
+          "enrollment_audio": "audio/example-01-b-enrollment.wav",
+          "estimate_audio": "audio/example-01-b-estimate.wav",
+          "target_audio": "audio/example-01-b-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        }
+      ]
+    },
+    {
+      "id": "example-02",
+      "mixture_audio": "audio/example-02-mixture.wav",
+      "excerpt_seconds": 5.12475,
+      "queries": [
+        {
+          "target": "a",
+          "enrollment_audio": "audio/example-02-a-enrollment.wav",
+          "estimate_audio": "audio/example-02-a-estimate.wav",
+          "target_audio": "audio/example-02-a-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        },
+        {
+          "target": "b",
+          "enrollment_audio": "audio/example-02-b-enrollment.wav",
+          "estimate_audio": "audio/example-02-b-estimate.wav",
+          "target_audio": "audio/example-02-b-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        }
+      ]
+    },
+    {
+      "id": "example-03",
+      "mixture_audio": "audio/example-03-mixture.wav",
+      "excerpt_seconds": 5.48,
+      "queries": [
+        {
+          "target": "a",
+          "enrollment_audio": "audio/example-03-a-enrollment.wav",
+          "estimate_audio": "audio/example-03-a-estimate.wav",
+          "target_audio": "audio/example-03-a-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        },
+        {
+          "target": "b",
+          "enrollment_audio": "audio/example-03-b-enrollment.wav",
+          "estimate_audio": "audio/example-03-b-estimate.wav",
+          "target_audio": "audio/example-03-b-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        }
+      ]
+    },
+    {
+      "id": "example-04",
+      "mixture_audio": "audio/example-04-mixture.wav",
+      "excerpt_seconds": 5.902375,
+      "queries": [
+        {
+          "target": "a",
+          "enrollment_audio": "audio/example-04-a-enrollment.wav",
+          "estimate_audio": "audio/example-04-a-estimate.wav",
+          "target_audio": "audio/example-04-a-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        },
+        {
+          "target": "b",
+          "enrollment_audio": "audio/example-04-b-enrollment.wav",
+          "estimate_audio": "audio/example-04-b-estimate.wav",
+          "target_audio": "audio/example-04-b-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        }
+      ]
+    },
+    {
+      "id": "example-05",
+      "mixture_audio": "audio/example-05-mixture.wav",
+      "excerpt_seconds": 6.0,
+      "queries": [
+        {
+          "target": "a",
+          "enrollment_audio": "audio/example-05-a-enrollment.wav",
+          "estimate_audio": "audio/example-05-a-estimate.wav",
+          "target_audio": "audio/example-05-a-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        },
+        {
+          "target": "b",
+          "enrollment_audio": "audio/example-05-b-enrollment.wav",
+          "estimate_audio": "audio/example-05-b-estimate.wav",
+          "target_audio": "audio/example-05-b-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        }
+      ]
+    },
+    {
+      "id": "example-06",
+      "mixture_audio": "audio/example-06-mixture.wav",
+      "excerpt_seconds": 5.679,
+      "queries": [
+        {
+          "target": "a",
+          "enrollment_audio": "audio/example-06-a-enrollment.wav",
+          "estimate_audio": "audio/example-06-a-estimate.wav",
+          "target_audio": "audio/example-06-a-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        },
+        {
+          "target": "b",
+          "enrollment_audio": "audio/example-06-b-enrollment.wav",
+          "estimate_audio": "audio/example-06-b-estimate.wav",
+          "target_audio": "audio/example-06-b-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        }
+      ]
+    },
+    {
+      "id": "example-07",
+      "mixture_audio": "audio/example-07-mixture.wav",
+      "excerpt_seconds": 4.875125,
+      "queries": [
+        {
+          "target": "a",
+          "enrollment_audio": "audio/example-07-a-enrollment.wav",
+          "estimate_audio": "audio/example-07-a-estimate.wav",
+          "target_audio": "audio/example-07-a-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        },
+        {
+          "target": "b",
+          "enrollment_audio": "audio/example-07-b-enrollment.wav",
+          "estimate_audio": "audio/example-07-b-estimate.wav",
+          "target_audio": "audio/example-07-b-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        }
+      ]
+    },
+    {
+      "id": "example-08",
+      "mixture_audio": "audio/example-08-mixture.wav",
+      "excerpt_seconds": 4.26475,
+      "queries": [
+        {
+          "target": "a",
+          "enrollment_audio": "audio/example-08-a-enrollment.wav",
+          "estimate_audio": "audio/example-08-a-estimate.wav",
+          "target_audio": "audio/example-08-a-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        },
+        {
+          "target": "b",
+          "enrollment_audio": "audio/example-08-b-enrollment.wav",
+          "estimate_audio": "audio/example-08-b-estimate.wav",
+          "target_audio": "audio/example-08-b-target.wav",
+          "enrollment_excerpt_seconds": 3.0
+        }
+      ]
+    }
+  ]
 }
