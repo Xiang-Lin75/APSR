@@ -43,100 +43,61 @@ Validation-selected **epoch 102**, **R4**, **seed 43**; 8 kHz, minimum-length mi
 
 [Exact summary](evaluation/wsj0-2mix/summary.json) · [Per-query metrics](evaluation/wsj0-2mix/metrics.csv) · [Portable trial list](evaluation/wsj0-2mix/trials.csv)
 
-## Checkpoint and reproducibility
-
-Download **`apsr_p_wsj0_2mix_r4_seed43_e102.pt`** from the [E102 release](https://github.com/Xiang-Lin75/APSR-P/releases/tag/wsj0-2mix-r4-seed43-e102). It contains inference parameters and buffers only. The release also provides the matching inference configuration, model card, test summary, tensor inventory, export verification, and SHA256 checksums.
-
-The exported state was checked tensor by tensor against the evaluated E102 checkpoint. Strict loading and a full-length paired-query forward comparison passed with identical outputs in the same runtime. The conversion does not replace or rerun the 6,000-query benchmark.
-
-The standalone main model is implemented in [`apsr/models/apsr.py`](apsr/models/apsr.py). Its components, training objective, paired-query evaluator, and data-preparation tools are included in this repository. The artifact verifier below needs only Python's standard library:
-
-```bash
-python evaluation/verify_results.py
-```
-
-It verifies checksums, query pairing, mixture-baseline subtraction, identity decisions, and all published metric means. See [checkpoint details](checkpoints/README.md) and [evaluation protocol](evaluation/README.md).
-
 ## Installation
 
-Python 3.10 or later is required. Install matching PyTorch and torchaudio builds for your CPU/CUDA environment first; see the [official PyTorch installation instructions](https://pytorch.org/get-started/locally/). The integration was tested with Python 3.13 and PyTorch/torchaudio 2.7.0+cu118. The historical full test used PyTorch 2.10.0+cu128. Numerical results can differ across backends.
-
-Run these commands from this repository's root:
+Use Python 3.10+ and install the appropriate [PyTorch build](https://pytorch.org/get-started/locally/) for your CPU or CUDA device.
 
 ```bash
+git clone https://github.com/Xiang-Lin75/APSR-P.git
+cd APSR-P
 python -m pip install -r requirements.txt
+```
+
+## Quick Start
+
+### Extract with the pretrained model
+
+Download the E102 weights and try the included audio example:
+
+```bash
 python scripts/download_checkpoint.py
-python inference.py --mixture mixture.wav --enrollment enrollment.wav --checkpoint checkpoints/apsr_p_wsj0_2mix_r4_seed43_e102.pt --output outputs/target.wav --device auto
+python inference.py --mixture site/audio/example-01-mixture.wav --enrollment site/audio/example-01-a-enrollment.wav --checkpoint checkpoints/apsr_p_wsj0_2mix_r4_seed43_e102.pt --output outputs/target.wav --device auto
 ```
 
-Both inputs must be mono 8-kHz WAV files. The CLI writes a float WAV of the same length as the mixture. It does not need a clean target or silently resample audio.
+Replace the two input paths with your own **mono 8-kHz WAVs**. The extracted speech is saved to `outputs/target.wav`. [Inference and Python API](docs/INFERENCE.md).
 
-Python API:
+### Train
 
-```python
-import torch
-from apsr import APSRP
-
-model = APSRP.from_pretrained("checkpoints/apsr_p_wsj0_2mix_r4_seed43_e102.pt", device="cpu")
-# mixture: (batch, samples); enrollment: (batch, enrollment_samples)
-with torch.inference_mode():
-    target = model(mixture, enrollment)  # (batch, 1, samples)
-```
-
-## Repository structure
-
-```text
-apsr/models/       Main model, encoder/decoder, pooling, separator, memory
-apsr/data/         Dataset loading, paired targets and training sampling
-apsr/losses/       SI-SDR, normalized spectral reconstruction and eSTOI
-apsr/training/     Optimizer/scheduler, validation selection and resume
-apsr/metrics/      Evaluation metric definitions
-apsr/utils/        Checkpoint/runtime helpers and MAC accounting
-configs/           WSJ0-2mix and WHAM! recipes for P
-protocols/         Portable training/validation trial identities
-scripts/           Manifest preparation and verified weight download
-checkpoints/       Weight metadata and untrained source-initialization fixture
-evaluation/        Frozen E102 results and portable test queries
-docs/              Code map, data/training instructions and figures
-tests/             Topology, conditioning, recurrence and protocol checks
-site/              Existing listening demo
-```
-
-Start with `APSRP.forward()`, then read `separator.py` for the shared refinement schedule and `memory.py` for the acoustic-time recurrence. [Code-to-method map](docs/CODE_MAP.md).
-
-## Training and evaluation
-
-Prepare licensed audio using [DATA.md](docs/DATA.md), then install the additional dependencies:
+Prepare the audio and manifests using [Data preparation](docs/DATA.md), then run:
 
 ```bash
 python -m pip install -r requirements-train.txt
 python train.py --config configs/wsj0_2mix.yaml --output runs/p-wsj0 --device cuda
-python train.py --config configs/wsj0_2mix.yaml --output runs/p-wsj0 --resume runs/p-wsj0/latest.pt --device cuda
 ```
 
-For WHAM!, use `configs/wham.yaml` after preparing `mix_both`, `s1`, `s2` and enrollment paths. The WHAM! recipe disables clean-source rebalancing. [Training and initialization details](docs/TRAINING.md).
+Use `configs/wham.yaml` for WHAM!. [Full recipe and resume instructions](docs/TRAINING.md).
+
+### Evaluate
 
 ```bash
 python -m pip install -r requirements-eval.txt
 python evaluate.py --checkpoint checkpoints/apsr_p_wsj0_2mix_r4_seed43_e102.pt --manifest data/wsj0_2mix/tt --output outputs/p-e102-test --device cuda
 ```
 
-Use `--primary-only` to compute SI-SDR/SI-SDRi and TCR without PESQ/eSTOI/SDR dependencies. Missing secondary metrics are recorded as `PENDING`. Checkpoints are selected using validation, never this test command. [Evaluation details](docs/EVALUATION.md).
+[Evaluation protocol](docs/EVALUATION.md) · [MACs and runtime](docs/EFFICIENCY.md).
 
-```bash
-python benchmark.py --checkpoint checkpoints/apsr_p_wsj0_2mix_r4_seed43_e102.pt --device cuda --output outputs/runtime.json
-python -m pip install -e ".[test]"
-python -m pytest
-```
+## Documentation
 
-The benchmark reports synchronized whole-utterance RTF and neural MACs. [Measurement scope](docs/EFFICIENCY.md). Integration evidence is recorded in [SOURCE_INTEGRATION.md](docs/SOURCE_INTEGRATION.md).
+| Guide | Contents |
+|---|---|
+| [Code map](docs/CODE_MAP.md) | Model modules and their correspondence to the method |
+| [Data preparation](docs/DATA.md) | WSJ0-2mix / WHAM! layout and paired trial manifests |
+| [Training](docs/TRAINING.md) | Loss, initialization, scheduler and checkpoint resume |
+| [Inference](docs/INFERENCE.md) | WAV extraction, Python API and benchmark commands |
+| [Evaluation](docs/EVALUATION.md) | Metrics and test protocol |
+| [Checkpoint](checkpoints/README.md) | E102 weights and verification |
+| [Source integration](docs/SOURCE_INTEGRATION.md) | Compatibility tests and validation scope |
 
 ## License status
 
-The source license is awaiting author confirmation; see [LICENSE_STATUS.md](LICENSE_STATUS.md). This source candidate does not imply an MIT or Apache license. Dependencies and corpus audio retain their respective terms.
-
-## Listening demo
-
-The [demo website](https://xiang-lin75.github.io/APSR-P/) provides **eight paired-target listening examples** with **Enrollment · Mixture · APSR-P · Clean target**, spectrograms, and A/B target switching for the same mixture. Comparison excerpts are at most six seconds; enrollment excerpts are at most three seconds. Outputs were precomputed using E102. The authors confirmed the applicable permission for these short research-demo excerpts; see [data notice](DATA_NOTICE.md).
-
-The listening layout was informed by the [Universal Speech Enhancement Hybrid demo](https://nanless.github.io/universal-speech-enhancement-demo/#hybrid). GitHub Pages deploys only `site/`; the method figures, checkpoint links, and test artifacts remain in this repository.
+The source license is awaiting author confirmation; see [LICENSE_STATUS.md](LICENSE_STATUS.md). Dependencies and audio retain their respective terms; see [third-party notices](THIRD_PARTY_NOTICES.md) and [data notice](DATA_NOTICE.md).
