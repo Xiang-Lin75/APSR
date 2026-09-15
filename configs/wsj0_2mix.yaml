@@ -1,0 +1,27 @@
+# Paths are relative to the working directory. Batch 2 = two mixtures / four target queries.
+model: APSR-P
+sample_rate: 8000
+data:
+  train_manifest: data/wsj0_2mix/tr
+  validation_manifest: data/wsj0_2mix/cv
+  dynamic_source_rebalance: true
+loader:
+  batch_size: 2
+  workers: 6
+  validation_workers: 4
+loss:
+  lambda_spectral: 0.1
+  lambda_estoi: 0.1
+optimizer:
+  lr: 0.001
+  weight_decay: 0.0
+scheduler:
+  factor: 0.5
+  patience: 3
+trainer:
+  seed: 43
+  epochs: 150
+  clip_grad_norm: 5.0
+  early_stop_patience: 6
+  initialization: checkpoints/paper_initialization_seed43.pt
+  initialization_sha256: dce6eda6bf6c48a50e33468a8a55b70668935fc9082c9316d1372463391407bb

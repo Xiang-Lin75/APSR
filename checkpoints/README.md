@@ -27,6 +27,17 @@ import torch
 state = torch.load("apsr_p_wsj0_2mix_r4_seed43_e102.pt", map_location="cpu", weights_only=True)
 ```
 
-This loads weights only. Extraction requires the matching model implementation, planned after acceptance. Once that code is available, instantiate it with `network_config` from the configuration, load `state` with `strict=True`, and call `eval()`. No runnable inference command is claimed before the architecture release.
+The standalone implementation is now included:
+
+```python
+from apsr import APSRP
+model = APSRP.from_pretrained("apsr_p_wsj0_2mix_r4_seed43_e102.pt", device="cpu")
+```
+
+The current `inference_config.json` documents this public API. The immutable GitHub Release's original configuration describes the historical source constructor; its disabled-feature fields are not constructor arguments to the public class. Existing checkpoint bytes and release checksums are preserved.
 
 The export retains every evaluated model tensor exactly, including non-trainable parameters and buffers. It excludes optimizer, scheduler, full training configuration, and recovery metadata. Strict loading and identical full-length paired outputs were verified locally; no retraining or quantization was applied.
+
+## Untrained initialization fixture
+
+`paper_initialization_seed43.pt` is separate from the trained E102 weights. It contains the frozen source implementation's **untrained** seed-43 tensors and CPU RNG state generated during integration, enabling the reorganized trainer to start with the same tensors as that source implementation in the verified environment. It is not a saved epoch-zero checkpoint from the original cloud run. See [training details](../docs/TRAINING.md).

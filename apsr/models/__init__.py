@@ -1,0 +1,5 @@
+"""The paper's main model and its components."""
+
+from .apsr import APSRP
+
+__all__ = ["APSRP"]

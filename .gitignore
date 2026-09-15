@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+build/
+dist/
+/runs/
+/outputs/
+/data/
+checkpoints/*.download
+checkpoints/apsr_p_wsj0_2mix_r4_seed43_e102.pt

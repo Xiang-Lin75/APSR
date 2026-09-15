@@ -44,6 +44,6 @@ SI-SDR is computed in float64 after subtracting the estimate/reference means, us
 
 All headline means weight queries equally. TCR is 117/6,000 = 1.95%; both target queries have positive margins for 2,886/3,000 mixtures = 96.2%. These are different statistics. If comparing future systems, pair by `key` and keep both queries of a mixture together when resampling. This single-seed release does not estimate variability across training seeds.
 
-## Later code release
+## Running extraction and evaluation
 
-Architecture, inference/evaluation entrypoints, pinned dependencies, and a data-preparation recipe are planned after acceptance. Those components are needed to reproduce predictions from licensed audio. The current release supports verification of the reported scores and trial mapping. Quality scores, model-forward throughput, and full streaming latency are separate measurements; no streaming RTF is inferred from this table.
+The main model, `evaluate.py`, metric dependencies and manifest preparation are included. Follow [data preparation](../docs/DATA.md) and [evaluation instructions](../docs/EVALUATION.md) to evaluate licensed audio. New evaluations use separate output directories and do not overwrite these frozen records. Quality scores, model-forward throughput, and full streaming latency are separate measurements; no streaming RTF is inferred from this table.
