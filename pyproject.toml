@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apsr-p"
+version = "0.1.0"
+description = "APSR-P main model for causal target speaker extraction"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["torch>=2.7", "numpy>=1.24", "soundfile>=0.12", "PyYAML>=6", "tqdm>=4.66"]
+
+[project.optional-dependencies]
+train = ["torchaudio>=2.7", "torch-stoi==0.2.3"]
+eval = ["mir_eval==0.8.2", "pesq==0.0.4", "pystoi==0.4.1"]
+test = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+include = ["apsr*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

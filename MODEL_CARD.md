@@ -5,7 +5,7 @@
 | Field | Value |
 |---|---|
 | Task | Enrollment-conditioned target speaker extraction |
-| Variant | `progressive_memory_only_r4` (`m5_ablation_v6`) |
+| Public implementation | `apsr.APSRP`, the paper's P model at R4 |
 | Training data | WSJ0-2mix, 8 kHz, minimum-length mixtures |
 | Training seed / refinement rounds | 43 / 4 |
 | Selection | Best validation SI-SDRi, epoch 102 |
@@ -21,7 +21,7 @@ The source commit identifies the private frozen training implementation. It is n
 
 Inputs are a mono 8-kHz mixture waveform and a separate utterance from the desired speaker. Output is an estimated target waveform aligned with the mixture. The frozen evaluation uses full mixture and enrollment utterances; paired enrollment queries are right-padded together by the evaluator. It does not use the 6-s/3-s listening-demo excerpts as benchmark inputs.
 
-The configuration uses a 256-sample STFT window, 64-sample hop, 64 feature channels, eight enrollment tokens, 16-dimensional memory, and four shared refinement calls. `inference_config.json` preserves the exact constructor configuration, including compatibility and disabled-feature fields required by the frozen implementation. It contains no dataset or machine paths.
+The configuration uses a 256-sample STFT window, 64-sample hop, 64 feature channels, eight enrollment tokens, 16-dimensional memory, and four shared refinement calls. `checkpoints/inference_config.json` describes the standalone public class. The immutable E102 release retains its original historical configuration. Both load the same inference tensor values; neither contains dataset or machine paths.
 
 ## Architecture and scope
 
@@ -37,6 +37,6 @@ The benchmark used PyTorch 2.10.0+cu128, CUDA 12.8, and an RTX 3090, with one mi
 
 ## Availability
 
-Inference weights, configuration, test artifacts, and integrity verification are released now. Architecture, training, inference, and audio-evaluation code are planned after acceptance. A plain state dictionary is not a standalone executable model and requires that architecture. The current artifact verifier recomputes published CSV statistics without running extraction.
+The source package includes the standalone APSR-P main architecture, inference, training, paired-query evaluation, MAC/RTF measurement and data preparation. `APSRP.from_pretrained()` loads the existing E102 tensor-only checkpoint strictly. The artifact verifier independently recomputes published CSV statistics without running extraction. See `docs/SOURCE_INTEGRATION.md` for the integration test scope.
 
-No WSJ0 recordings, extracted recordings, optimizer/scheduler state, or deployment credentials are included. Corpus access and redistribution remain governed by the applicable data agreement; see the [data notice](https://github.com/Xiang-Lin75/APSR-P/blob/main/DATA_NOTICE.md).
+The E102 checkpoint contains no recordings, optimizer/scheduler state or deployment credentials. The separately identified seed-43 initialization fixture contains untrained source-model tensors and a CPU RNG state. The existing `site/` contains only the previously approved short demo excerpts. Full corpus access and redistribution remain governed by the applicable data agreement; see the [data notice](https://github.com/Xiang-Lin75/APSR-P/blob/main/DATA_NOTICE.md).

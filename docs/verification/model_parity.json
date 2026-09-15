@@ -1,0 +1,93 @@
+{
+  "status": "PASSED",
+  "torch": "2.7.0+cu118",
+  "tensor_count": 398,
+  "registered_parameters": 312986,
+  "trainable_parameters": 306842,
+  "weights_sha256": "4cafe7f02bdd5e0a0e6025e845067ae341d26bcf53fdf64a0b54018db6944762",
+  "initialization_sha256": "dce6eda6bf6c48a50e33468a8a55b70668935fc9082c9316d1372463391407bb",
+  "forward_cases": [
+    {
+      "device": "cpu",
+      "batch": 1,
+      "mixture_samples": 2048,
+      "enrollment_samples": 2304,
+      "max_absolute_error": 0.0,
+      "exactly_equal": true
+    },
+    {
+      "device": "cpu",
+      "batch": 2,
+      "mixture_samples": 4096,
+      "enrollment_samples": 3008,
+      "max_absolute_error": 0.0,
+      "exactly_equal": true
+    },
+    {
+      "device": "cpu",
+      "batch": 1,
+      "mixture_samples": 8000,
+      "enrollment_samples": 16000,
+      "max_absolute_error": 0.0,
+      "exactly_equal": true
+    },
+    {
+      "device": "cpu",
+      "input": "real full-length paired speech",
+      "batch": 2,
+      "mixture_samples": 64619,
+      "enrollment_samples": 70481,
+      "max_absolute_error": 0.0,
+      "exactly_equal": true
+    },
+    {
+      "device": "cuda",
+      "batch": 1,
+      "mixture_samples": 2048,
+      "enrollment_samples": 2304,
+      "max_absolute_error": 0.0,
+      "exactly_equal": true
+    },
+    {
+      "device": "cuda",
+      "batch": 2,
+      "mixture_samples": 4096,
+      "enrollment_samples": 3008,
+      "max_absolute_error": 0.0,
+      "exactly_equal": true
+    },
+    {
+      "device": "cuda",
+      "batch": 1,
+      "mixture_samples": 8000,
+      "enrollment_samples": 16000,
+      "max_absolute_error": 0.0,
+      "exactly_equal": true
+    },
+    {
+      "device": "cuda",
+      "input": "real full-length paired speech",
+      "batch": 2,
+      "mixture_samples": 64619,
+      "enrollment_samples": 70481,
+      "max_absolute_error": 0.0,
+      "exactly_equal": true
+    }
+  ],
+  "gradient_max_absolute_error": 0.0,
+  "scope": "Source migration regression, not a rerun of the 6000-query benchmark.",
+  "macs": {
+    "total_macs": 19690951728,
+    "macs_per_second": 4922737932.0,
+    "mix_seconds": 4.0,
+    "enroll_seconds": 3.0,
+    "by_op": {
+      "CausalAttentionMatMul": 8047494000,
+      "Conv2d": 3845029952,
+      "EnrollmentTokenPooling": 12609536,
+      "GRU": 4990003200,
+      "Linear": 2795815040
+    }
+  },
+  "parameter_order_preserved": true
+}
