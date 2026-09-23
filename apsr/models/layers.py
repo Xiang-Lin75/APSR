@@ -1,3 +1,7 @@
+# ConvBlock and grouped GRUs adapted from GTCRN (Rong Xiaobin, MIT).
+# LA_2D follows TIGER gated local/global fusion with 2-D causal normalization.
+# Retained notices and source references: NOTICE and docs/THIRD_PARTY_NOTICES.md.
+
 """Normalization, grouped GRUs and convolutional building blocks."""
 
 from __future__ import annotations

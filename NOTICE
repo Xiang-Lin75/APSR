@@ -1,0 +1,29 @@
+APSR-P
+Copyright (c) 2026 APSR-P contributors
+
+The MIT License in LICENSE applies to APSR-P's original source code,
+documentation, and project-authored pretrained and initialization weights.
+It does not replace the licenses of the adapted components identified below.
+Corpus recordings and audio excerpts retain their original rights; see
+docs/DATA_NOTICE.md. Installing external dependencies does not relicense them.
+
+GTCRN: ERB, subband feature extraction, grouped GRUs and related blocks.
+Copyright (c) 2024 Rong Xiaobin
+License: MIT; full text in licenses/GTCRN-MIT.txt.
+
+TIGER: reference for gated local/global fusion and repository organization.
+Copyright (c) 2026 Kai Li (李凯)
+License: MIT; full text in licenses/TIGER-MIT.txt.
+
+Asteroid: SingleSrcNegSDR reference used by the SI-SDR training operator.
+Copyright (c) 2019 Pariente Manuel
+License: MIT; full text in licenses/Asteroid-MIT.txt.
+
+ESPnet / TF-GridNet: per-head Q/K/V projections and attention-head recombination.
+Copyright 2017 Johns Hopkins University (Shinji Watanabe)
+License: Apache-2.0; full text in licenses/ESPnet-Apache-2.0.txt.
+APSR-P changes normalization, causal and prefix-boundary masking, and the
+surrounding recurrent blocks. The adapted attention portions retain Apache-2.0.
+
+Component locations, source revisions and dependency links are documented in
+docs/THIRD_PARTY_NOTICES.md. These acknowledgments do not imply endorsement.

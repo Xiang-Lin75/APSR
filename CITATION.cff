@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this implementation, please cite this software repository."
+type: software
+title: "APSR-P: Progressive Enrollment and Anchored Memory for Causal Target Speaker Extraction"
+authors:
+  - name: "APSR-P contributors"
+repository-code: "https://github.com/Xiang-Lin75/APSR-P"
+url: "https://github.com/Xiang-Lin75/APSR-P"
+version: "0.1.0"
