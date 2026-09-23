@@ -1,3 +1,6 @@
+# SI-SDR calculation follows Asteroid SingleSrcNegSDR (MIT).
+# Copyright (c) 2019 Pariente Manuel; see licenses/Asteroid-MIT.txt and NOTICE.
+
 """Canonical waveform SI-SDR and pre-iSTFT normalized spectral loss."""
 
 import math

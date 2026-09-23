@@ -1,3 +1,6 @@
+# ERB and SFE adapted from GTCRN, Copyright (c) 2024 Rong Xiaobin.
+# MIT License: see licenses/GTCRN-MIT.txt and NOTICE.
+
 """Fixed ERB analysis/synthesis and local frequency unfolding."""
 
 from __future__ import annotations

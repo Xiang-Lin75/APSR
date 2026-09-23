@@ -13,7 +13,7 @@ Linguistic Data Consortium, 1993.
 Portions are copyright 1987–1989 Dow Jones & Company, Inc., and
 1992, 1993 Trustees of the University of Pennsylvania.
 
-The recordings retain their original rights and are not licensed by a future
-APSR-P code license. The figures and model implementation are separate from
+The recordings retain their original rights and are not covered by the
+APSR-P MIT license. The figures and model implementation are separate from
 the recordings. The site serves precomputed excerpts; it does not run or expose
 the model implementation.

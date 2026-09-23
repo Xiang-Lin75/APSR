@@ -1,6 +1,6 @@
 # Inference and Python API
 
-The command-line interface is the simplest way to extract a speaker:
+First complete the [package installation](../README.md#installation). Run commands below from the repository root:
 
 ```bash
 python scripts/download_checkpoint.py

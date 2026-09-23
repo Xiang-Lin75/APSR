@@ -13,13 +13,9 @@ This directory records the full test of **APSR-P P / R4 / seed 43 / validation-s
 
 Run `python evaluation/verify_results.py` from the repository root. It verifies CSV digests, unique trial keys, two targets for each mixture, finite metrics, per-query improvement subtraction, confusion decisions, and summary means. It validates the published artifacts; it does not recreate model predictions from audio.
 
-## Data and inference protocol
+## Trial identities
 
-- **Dataset:** 8-kHz minimum-length WSJ0-2mix, 3,000 test mixtures, both targets queried separately (6,000 queries). Enrollment is a different utterance of the requested speaker, fixed by the trial list.
-- **Checkpoint:** E102 selected by validation SI-SDRi, not test performance. One training seed, 43. Four shared refinement calls.
-- **Inputs:** full mixture and enrollment utterances, no random evaluation crops or external waveform normalization. The model's configured enrollment normalization remains enabled. Test mixtures are fixed, without dynamic source rebalancing.
-- **Batching:** one mixture and its two target queries per loader batch; the model receives two waveform/enrollment pairs. Enrollment utterances are right-padded to the longer enrollment in that pair. Retain this collation when reproducing the frozen evaluator.
-- **Scoring:** full-length target/mixture/estimate arrays are aligned to their common length. All 6,000 rows have finite metrics; no failed rows are excluded from these published means.
+The fixed benchmark contains 3,000 mixtures and both target queries (6,000 queries), using the validation-selected E102 checkpoint. Follow the [full-utterance paired-query protocol](../docs/EVALUATION.md), including enrollment padding, normalization and scoring conventions.
 
 `trials.csv` preserves the original `key`, mixture index `idx`, and target query index `case_idx`. `target_source` identifies `s1` or `s2`; `case_idx` is the evaluator's within-pair order and should not substitute for the explicit source mapping.
 
@@ -40,7 +36,7 @@ Resolve `mixture_relpath` and `target_relpath` against your own `WSJ0_2MIX_ROOT`
 | `target_confusion_rate` | Per-query indicator: 1 when target margin is ≤ 0, otherwise 0 |
 | `proj_sdr`, `proj_sdr_mix`, `proj_sdr_i` | Legacy scalar-projection SDR audit fields; not the paper's BSS Eval SDR |
 
-SI-SDR is computed in float64 after subtracting the estimate/reference means, using epsilon `1e-8` in projection energy and signal/error energy ratios. Improvements are computed per query before taking the arithmetic mean. The mixture baseline is measured, not assumed to be zero. BSS Eval receives the requested target and its estimate without output permutation. eSTOI uses `extended=True`.
+Metric arithmetic and runtime options are defined in [Evaluation](../docs/EVALUATION.md). The CSV retains full precision and the additional audit fields listed above.
 
 All headline means weight queries equally. TCR is 117/6,000 = 1.95%; both target queries have positive margins for 2,886/3,000 mixtures = 96.2%. These are different statistics. If comparing future systems, pair by `key` and keep both queries of a mixture together when resampling. This single-seed release does not estimate variability across training seeds.
 
