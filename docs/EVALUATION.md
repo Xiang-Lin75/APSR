@@ -3,7 +3,7 @@
 Select the checkpoint using validation before running `evaluate.py`. The evaluator reads one mixture and its two target/enrollment queries together, matching the original paired collation. Full enrollment waveforms are zero-padded to the longer enrollment within the pair before the model's standard-deviation normalization. Running each target independently or cropping enrollment to a demo excerpt changes this protocol.
 
 ```bash
-python evaluate.py --checkpoint checkpoints/apsr_p_wsj0_2mix_r4_seed43_e102.pt --manifest data/wsj0_2mix/tt --output outputs/p-test --device cuda
+python evaluate.py --checkpoint checkpoints/apsr_wsj0_2mix_r4_seed43_e102.pt --manifest data/wsj0_2mix/tt --output outputs/p-test --device cuda
 ```
 
 Outputs are `metrics.csv` (one row per query) and `summary.json` (arithmetic means, query counts, checkpoint/manifest hashes and runtime identity). `--limit` labels a subset explicitly. Reusing an existing result directory is rejected.

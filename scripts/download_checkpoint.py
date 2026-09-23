@@ -5,10 +5,10 @@ from pathlib import Path
 from urllib.request import urlopen
 from apsr.utils.runtime import sha256
 
-FILENAME = "apsr_p_wsj0_2mix_r4_seed43_e102.pt"
+FILENAME = "apsr_wsj0_2mix_r4_seed43_e102.pt"
 SHA256 = "4cafe7f02bdd5e0a0e6025e845067ae341d26bcf53fdf64a0b54018db6944762"
 URL = (
-    "https://github.com/Xiang-Lin75/APSR-P/releases/download/wsj0-2mix-r4-seed43-e102/"
+    "https://github.com/Xiang-Lin75/APSR/releases/download/wsj0-2mix-r4-seed43-e102/"
     + FILENAME
 )
 

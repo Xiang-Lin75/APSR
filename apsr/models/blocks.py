@@ -1,9 +1,9 @@
 # Grouped dual-path processing follows GTCRN (MIT). Per-head attention
 # projections and head recombination follow ESPnet TF-GridNet (Apache-2.0).
-# APSR-P changes normalization, causal/prefix-boundary handling and recurrence.
+# APSR changes normalization, causal/prefix-boundary handling and recurrence.
 # Retained notices: NOTICE, licenses/GTCRN-MIT.txt, licenses/ESPnet-Apache-2.0.txt.
 
-"""APSR-P separator block; memory is the sole enrollment-to-mixture route."""
+"""APSR separator block; memory is the sole enrollment-to-mixture route."""
 
 from __future__ import annotations
 import math
@@ -108,7 +108,7 @@ class MemoryOnlyCausalAttention(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         if self._streaming:
-            raise RuntimeError("APSR-P blocks are not verified for streaming")
+            raise RuntimeError("APSR blocks are not verified for streaming")
         return self._forward_offline(x)
 
 
@@ -136,7 +136,7 @@ class SeparatorBlock(nn.Module):
 
     def forward(self, x: torch.Tensor, h=None):
         if h is not None:
-            raise ValueError("APSR-P blocks require fresh block state")
+            raise ValueError("APSR blocks require fresh block state")
         b, c, t, f = x.shape
         prefix_tokens = int(getattr(self, "direct_prefix_tokens", 0))
         if not 0 < prefix_tokens < t:

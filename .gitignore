@@ -9,4 +9,5 @@ dist/
 /outputs/
 /data/
 checkpoints/*.download
+checkpoints/apsr_wsj0_2mix_r4_seed43_e102.pt
 checkpoints/apsr_p_wsj0_2mix_r4_seed43_e102.pt

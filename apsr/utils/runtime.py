@@ -47,6 +47,7 @@ def get_device(value):
 def load_config(path):
     with open(path, encoding="utf-8") as handle:
         cfg = yaml.safe_load(handle)
-    if cfg.get("model") != "APSR-P" or cfg.get("sample_rate") != 8000:
-        raise ValueError("This release supports the 8-kHz APSR-P main model")
+    if cfg.get("model") not in ("APSR", "APSR-P") or cfg.get("sample_rate") != 8000:
+        raise ValueError("This release supports the 8-kHz APSR main model")
+    cfg["model"] = "APSR"
     return cfg

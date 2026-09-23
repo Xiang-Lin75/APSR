@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Audio demonstrations of APSR-P target speaker extraction. Compare enrollment, mixture, extracted speech and clean target.">
-  <title>APSR-P · Audio Demo</title>
+  <meta name="description" content="Audio demonstrations of APSR target speaker extraction. Compare enrollment, mixture, extracted speech and clean target.">
+  <title>APSR · Audio Demo</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#listen">Skip to audio examples</a>
-  <header id="top"><h1>APSR-P</h1><p>Target Speaker Extraction · Audio Demo</p></header>
+  <header id="top"><h1>APSR</h1><p>Target Speaker Extraction · Audio Demo</p></header>
   <main class="wrap" id="listen">
     <h2>WSJ0-2mix</h2>
-    <p class="guide">Listen to the enrollment, then compare Mixture → APSR-P → Clean target. Switch between A and B to extract either speaker from the same mixture.</p>
+    <p class="guide">Listen to the enrollment, then compare Mixture → APSR → Clean target. Switch between A and B to extract either speaker from the same mixture.</p>
     <p id="load-status" role="status">Loading audio examples…</p>
     <div id="audio-pending" class="availability" hidden><p>Audio examples are awaiting public release.</p><p>WSJ0 publication permissions are being confirmed.</p></div>
     <div id="listening-content" hidden>
@@ -24,7 +24,7 @@
       <details class="playback-notes"><summary>Playback notes</summary><p>Eight randomly selected mixtures, with both target queries retained. Playback uses the first up to 6 seconds of each signal and up to 3 seconds of a separate enrollment utterance. Outputs are precomputed from full-utterance inference.</p><p>Mixture, clean targets and extracted outputs share one gain to prevent clipping. Their players share the playback position; enrollment is independent. Spectrograms show 0–4 kHz from bottom to top with a common −80 to −20 dB magnitude scale relative to amplitude 1.</p></details>
     </div>
   </main>
-  <footer class="wrap"><a href="https://github.com/Xiang-Lin75/APSR-P">GitHub</a><a href="https://catalog.ldc.upenn.edu/LDC93S6A">WSJ0 data source</a><a href="https://nanless.github.io/universal-speech-enhancement-demo/#hybrid">Layout reference</a><a href="#top">Back to top ↑</a></footer>
+  <footer class="wrap"><a href="https://github.com/Xiang-Lin75/APSR">GitHub</a><a href="https://catalog.ldc.upenn.edu/LDC93S6A">WSJ0 data source</a><a href="https://nanless.github.io/universal-speech-enhancement-demo/#hybrid">Layout reference</a><a href="#top">Back to top ↑</a></footer>
   <template id="example-template">
     <article class="example">
       <div class="example-heading"><h3 class="example-title" aria-live="polite"></h3><div class="target-switch" role="group"><span>Target</span><button type="button" data-target="a" aria-pressed="true">A</button><button type="button" data-target="b" aria-pressed="false">B</button></div></div>

@@ -1,5 +1,5 @@
 # Paths are relative to the working directory. Batch 2 = two mixtures / four target queries.
-model: APSR-P
+model: APSR
 sample_rate: 8000
 data:
   train_manifest: data/wsj0_2mix/tr

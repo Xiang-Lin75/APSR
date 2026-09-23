@@ -1,4 +1,4 @@
-"""MAC accounting for the exact APSR-P operators, including dense masked attention."""
+"""MAC accounting for the exact APSR operators, including dense masked attention."""
 
 from __future__ import annotations
 from collections import defaultdict

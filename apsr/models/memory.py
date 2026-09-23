@@ -1,4 +1,4 @@
-"""Enrollment-anchored causal memory for APSR-P."""
+"""Enrollment-anchored causal memory for APSR."""
 
 from __future__ import annotations
 import math

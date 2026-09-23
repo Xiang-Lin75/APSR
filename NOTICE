@@ -1,7 +1,7 @@
-APSR-P
-Copyright (c) 2026 APSR-P contributors
+APSR
+Copyright (c) 2026 APSR contributors
 
-The MIT License in LICENSE applies to APSR-P's original source code,
+The MIT License in LICENSE applies to APSR's original source code,
 documentation, and project-authored pretrained and initialization weights.
 It does not replace the licenses of the adapted components identified below.
 Corpus recordings and audio excerpts retain their original rights; see
@@ -22,7 +22,7 @@ License: MIT; full text in licenses/Asteroid-MIT.txt.
 ESPnet / TF-GridNet: per-head Q/K/V projections and attention-head recombination.
 Copyright 2017 Johns Hopkins University (Shinji Watanabe)
 License: Apache-2.0; full text in licenses/ESPnet-Apache-2.0.txt.
-APSR-P changes normalization, causal and prefix-boundary masking, and the
+APSR changes normalization, causal and prefix-boundary masking, and the
 surrounding recurrent blocks. The adapted attention portions retain Apache-2.0.
 
 Component locations, source revisions and dependency links are documented in

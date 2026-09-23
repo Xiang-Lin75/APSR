@@ -6,7 +6,7 @@ import time
 from pathlib import Path
 
 import torch
-from apsr import APSRP
+from apsr import APSR
 from apsr.utils.profile import estimate_tse_macs
 from apsr.utils.runtime import get_device, sha256, write_json
 
@@ -32,7 +32,7 @@ def main():
         raise FileExistsError(a.output)
     torch.set_num_threads(a.threads)
     device = get_device(a.device)
-    model = APSRP.from_pretrained(a.checkpoint, device)
+    model = APSR.from_pretrained(a.checkpoint, device)
     generator = torch.Generator().manual_seed(43)
     mix = torch.randn(1, round(8000 * a.mixture_seconds), generator=generator) * 0.05
     enrollment = (
@@ -67,7 +67,7 @@ def main():
     )
     actual_seconds = mix.shape[-1] / 8000
     report = dict(
-        model="APSR-P",
+        model="APSR",
         refinement_rounds=4,
         batch_size=1,
         dtype="float32",

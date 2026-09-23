@@ -1,6 +1,6 @@
 # WSJ0-2mix evaluation artifacts
 
-This directory records the full test of **APSR-P P / R4 / seed 43 / validation-selected E102**. It contains metadata and scores; recordings are not distributed.
+This directory records the full test of **APSR P / R4 / seed 43 / validation-selected E102**. It contains metadata and scores; recordings are not distributed.
 
 ## Available files
 

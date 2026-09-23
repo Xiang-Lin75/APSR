@@ -1,4 +1,4 @@
-"""Train the APSR-P main model using the released paper recipe."""
+"""Train the APSR main model using the released paper recipe."""
 
 import argparse
 import torch

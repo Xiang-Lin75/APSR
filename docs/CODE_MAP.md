@@ -1,10 +1,10 @@
-# Reading APSR-P
+# Reading APSR
 
 The package follows the paper's computation, with one canonical main model.
 
 | Method element | Implementation | Tensor contract |
 |---|---|---|
-| Full extraction | `models/apsr.py: APSRP.forward` | mixture `(B,L)`, enrollment `(B,E)` → target `(B,1,L)` |
+| Full extraction | `models/apsr.py: APSR.forward` | mixture `(B,L)`, enrollment `(B,E)` → target `(B,1,L)` |
 | STFT and ERB | `models/apsr.py: _extract_features`, `models/frontend.py` | spectra `(B,2,T,129)`; unfolded features `(B,9,T,65)` |
 | Shared encoder | `models/encoder.py: SpeechEncoder` | `(B,9,T,65)` → `(B,64,T,65)` |
 | Gated token pooling | `models/enrollment.py: GatedAttentiveEnrollmentPooling` | enrollment `(B,64,T_e,65)` → `(B,64,8,65)` |

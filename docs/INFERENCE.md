@@ -4,7 +4,7 @@ First complete the [package installation](../README.md#installation). Run comman
 
 ```bash
 python scripts/download_checkpoint.py
-python inference.py --mixture mixture.wav --enrollment enrollment.wav --checkpoint checkpoints/apsr_p_wsj0_2mix_r4_seed43_e102.pt --output outputs/target.wav --device auto
+python inference.py --mixture mixture.wav --enrollment enrollment.wav --checkpoint checkpoints/apsr_wsj0_2mix_r4_seed43_e102.pt --output outputs/target.wav --device auto
 ```
 
 Inputs must be mono 8-kHz WAVs. The output is a float WAV with the mixture's length. `--device auto` chooses CUDA when available, otherwise CPU. No target recording, API key or hosted service is required.
@@ -13,15 +13,15 @@ The README uses the supplied short listening excerpts for a runnable example. Th
 
 ## Python API
 
-Use the local Python interface when integrating APSR-P into another program, rather than invoking the command-line script:
+Use the local Python interface when integrating APSR into another program, rather than invoking the command-line script:
 
 ```python
 import torch
-from apsr import APSRP
+from apsr import APSR
 from apsr.utils.runtime import read_audio
 
-model = APSRP.from_pretrained(
-    "checkpoints/apsr_p_wsj0_2mix_r4_seed43_e102.pt", device="cpu"
+model = APSR.from_pretrained(
+    "checkpoints/apsr_wsj0_2mix_r4_seed43_e102.pt", device="cpu"
 )
 mixture = read_audio("mixture.wav").unsqueeze(0)
 enrollment = read_audio("enrollment.wav").unsqueeze(0)
@@ -34,10 +34,12 @@ Input shapes are `(batch, samples)` and `(batch, enrollment_samples)`; output is
 ## Runtime and verification
 
 ```bash
-python benchmark.py --checkpoint checkpoints/apsr_p_wsj0_2mix_r4_seed43_e102.pt --device cuda --output outputs/runtime.json
+python benchmark.py --checkpoint checkpoints/apsr_wsj0_2mix_r4_seed43_e102.pt --device cuda --output outputs/runtime.json
 python evaluation/verify_results.py
 python -m pip install -e ".[test]"
 python -m pytest
 ```
 
 See [measurement scope](EFFICIENCY.md), [checkpoint details](../checkpoints/README.md) and [integration checks](SOURCE_INTEGRATION.md). The artifact verifier checks the frozen CSV without running audio inference.
+
+The former `apsr.APSRP` import remains a compatibility alias for `apsr.APSR`; existing state dictionaries load unchanged.

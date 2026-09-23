@@ -17,9 +17,9 @@ class SpeechDecoder(nn.Module):
     ) -> None:
         super().__init__()
         if int(freq_downsample_layers) != 1:
-            raise ValueError("APSR-P requires freq_downsample_layers=1")
+            raise ValueError("APSR requires freq_downsample_layers=1")
         if int(encoder_freq_stride) != 1:
-            raise ValueError("APSR-P requires encoder_freq_stride=1")
+            raise ValueError("APSR requires encoder_freq_stride=1")
         channels = int(hidden_channels)
         if channels <= 0:
             raise ValueError("hidden_channels must be positive")
@@ -40,7 +40,7 @@ class SpeechDecoder(nn.Module):
     def forward(self, x: torch.Tensor, encoder_outputs):
         if len(encoder_outputs) != 1:
             raise ValueError(
-                f"APSR-P decoder requires exactly one encoder skip, got {len(encoder_outputs)}"
+                f"APSR decoder requires exactly one encoder skip, got {len(encoder_outputs)}"
             )
         x = self.skip_fuse[0](x_local=encoder_outputs[0], x_global=x)
         return self.de_convs[0](x)

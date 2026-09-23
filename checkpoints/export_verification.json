@@ -1,7 +1,7 @@
 {
   "status": "PASSED",
   "format": "PyTorch state_dict of CPU tensors only",
-  "weights_file": "apsr_p_wsj0_2mix_r4_seed43_e102.pt",
+  "weights_file": "apsr_wsj0_2mix_r4_seed43_e102.pt",
   "weights_sha256": "4cafe7f02bdd5e0a0e6025e845067ae341d26bcf53fdf64a0b54018db6944762",
   "weights_bytes": 1387075,
   "source_checkpoint_sha256": "43866ce6490cea19da3ab3883234656b48d8210e5f07fdc31816c54e26827e04",

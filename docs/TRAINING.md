@@ -29,7 +29,7 @@ The dynamic-SIR setting does not select new speaker pairs. The loader preserves 
 
 `checkpoints/paper_initialization_seed43.pt` contains **untrained** tensors and the post-construction CPU RNG state from the frozen source implementation initialized with seed 43 during integration. It was generated under PyTorch 2.7.0; it is not a saved epoch-zero artifact from the original cloud run. Its source equivalence and checksum are recorded in the integration report.
 
-The historical implementation constructed and replaced unused modules, consuming random draws. Simply rebuilding the active modules in a cleaner order changes their initial values even with the same seed. The supplied fixture preserves the source implementation's initial values in the verified runtime without distributing those historical modules. The canonical public training recipe therefore uses this seed-43 fixture. `APSRP()` itself remains a normal randomly initialized PyTorch module for programmatic use.
+The historical implementation constructed and replaced unused modules, consuming random draws. Simply rebuilding the active modules in a cleaner order changes their initial values even with the same seed. The supplied fixture preserves the source implementation's initial values in the verified runtime without distributing those historical modules. The canonical public training recipe therefore uses this seed-43 fixture. `APSR()` itself remains a normal randomly initialized PyTorch module for programmatic use.
 
 A fresh multi-day training run has not been repeated as part of code integration. Identical final results across library versions, devices or worker scheduling are not promised.
 
@@ -43,4 +43,4 @@ The trainer saves only at epoch boundaries. Unfinished batches must be repeated 
 
 Use `--smoke-steps 1` with a small local config and manifest to exercise training and validation. Such checkpoints and logs are labeled `SMOKE_ONLY`; they cannot silently resume into an unrestricted training run. Smoke checks do not supply paper results.
 
-Only the main APSR-P implementation is included. Experimental variant constructors and ablation launchers are not part of this package.
+Only the main APSR implementation is included. Experimental variant constructors and ablation launchers are not part of this package.

@@ -112,7 +112,7 @@ def compute_normalized_mag_ri_loss(
     Both inputs must already be represented on the *same model analysis
     grid* as ``(B, 2, T, F)`` with real and imaginary components at channel
     indices zero and one.  Keeping STFT construction outside this function is
-    deliberate: APSR-P supplies its pre-iSTFT target estimate and constructs the
+    deliberate: APSR supplies its pre-iSTFT target estimate and constructs the
     clean target with ``model.training_stft_ri`` so the loss cannot silently
     drift from the model's window, hop, centering, or frame-count convention.
 
