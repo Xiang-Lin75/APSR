@@ -1,4 +1,4 @@
-"""APSR-P: frequency-resolved enrollment memory with shared R4 refinement.
+"""APSR: frequency-resolved enrollment memory with shared R4 refinement.
 
 Read forward() for the full computation; separator.py and memory.py contain
 the refinement schedule and the time recurrence respectively.
@@ -18,7 +18,7 @@ from .decoder import SpeechDecoder, ComplexMaskHead
 from .separator import ProgressiveRefinement
 
 
-class APSRP(ProgressiveRefinement, nn.Module):
+class APSR(ProgressiveRefinement, nn.Module):
     """The paper's P model, 8 kHz, 64 channels, eight tokens, four rounds.
 
     Input: mixture (B,L), enrollment (B,E) or (1,E), float32 waveforms.
@@ -106,7 +106,7 @@ class APSRP(ProgressiveRefinement, nn.Module):
 
     def load_state_dict(self, state_dict, strict=True, assign=False):
         if not strict:
-            raise ValueError("APSR-P requires strict checkpoint loading")
+            raise ValueError("APSR requires strict checkpoint loading")
         state = {k.removeprefix("module."): v for k, v in state_dict.items()}
         if len(state) != len(state_dict):
             raise ValueError("Checkpoint contains colliding parameter names")
@@ -203,3 +203,7 @@ class APSRP(ProgressiveRefinement, nn.Module):
             .permute(0, 1, 3, 2)
             .contiguous()
         )
+
+
+# Compatibility alias for integrations using the former public class name.
+APSRP = APSR

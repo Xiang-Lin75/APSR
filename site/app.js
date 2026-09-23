@@ -1,7 +1,7 @@
 "use strict";
 const allAudio = new Set();
 const synchronizedTracks = new Set(["mixture", "estimate", "target"]);
-const trackLabels = {enrollment: "Enrollment", mixture: "Mixture", estimate: "APSR-P", target: "Clean target"};
+const trackLabels = {enrollment: "Enrollment", mixture: "Mixture", estimate: "APSR", target: "Clean target"};
 
 function makeTrack(id) {
   const figure = document.createElement("figure");

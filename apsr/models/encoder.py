@@ -17,9 +17,9 @@ class SpeechEncoder(nn.Module):
     ) -> None:
         super().__init__()
         if int(freq_downsample_layers) != 1:
-            raise ValueError("APSR-P requires freq_downsample_layers=1")
+            raise ValueError("APSR requires freq_downsample_layers=1")
         if int(encoder_freq_stride) != 1:
-            raise ValueError("APSR-P requires encoder_freq_stride=1")
+            raise ValueError("APSR requires encoder_freq_stride=1")
         channels = int(hidden_channels)
         if channels <= 0:
             raise ValueError("hidden_channels must be positive")

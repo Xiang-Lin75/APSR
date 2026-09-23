@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 import torch
 
-from apsr import APSRP
+from apsr import APSR
 from apsr.models.memory import TargetAnchoredTimeConstantMemory
 from apsr.models.blocks import MemoryOnlyCausalAttention
 
@@ -13,7 +13,7 @@ torch.set_num_threads(2)
 
 
 def test_schema_and_parameter_counts():
-    model = APSRP()
+    model = APSR()
     assert len(model.state_dict()) == 398
     assert sum(p.numel() for p in model.parameters()) == 312986
     assert sum(p.numel() for p in model.parameters() if p.requires_grad) == 306842
@@ -24,7 +24,7 @@ def test_schema_and_parameter_counts():
 
 
 def test_refinement_schedule_and_gradient():
-    model = APSRP()
+    model = APSR()
     calls = []
     handles = [
         block.register_forward_hook(lambda m, a, o, i=i: calls.append(i))
@@ -87,7 +87,7 @@ def test_paper_initialization_is_untrained_and_loadable():
     initial = torch.load(
         root / "checkpoints/paper_initialization_seed43.pt", weights_only=True
     )
-    model = APSRP()
+    model = APSR()
     model.load_state_dict(initial["model"])
     assert initial["seed"] == 43
     assert "optimizer" not in initial

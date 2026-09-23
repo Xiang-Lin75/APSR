@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <mxfile host="Electron" version="31.4.4" type="device">
-  <diagram id="m5_apsr_overview" name="APSR-P: paired expansion details">
+  <diagram id="m5_apsr_overview" name="APSR: paired expansion details">
     <mxGraphModel dx="0" dy="0" grid="1" gridSize="2" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="672.7559055118111" pageHeight="238.11023622047247" math="1" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0" />
@@ -321,7 +321,7 @@
         <mxCell id="dec_title" value="(c) Decoder" style="shape=rectangle;fillColor=none;strokeColor=none;html=1;whiteSpace=nowrap;overflow=visible;fontFamily=Times New Roman;fontSize=10.724362;fontColor=#25343E;fontStyle=1;align=center;verticalAlign=middle;spacing=0;spacingLeft=0;spacingRight=0;" vertex="1" parent="1">
           <mxGeometry x="1.8897637795275593" y="224.50393700787404" width="90.70866141732284" height="11.905511811023624" as="geometry" />
         </mxCell>
-        <mxCell id="main_title" value="(a) APSR-P" style="shape=rectangle;fillColor=none;strokeColor=none;html=1;whiteSpace=nowrap;overflow=visible;fontFamily=Times New Roman;fontSize=10.724362;fontColor=#25343E;fontStyle=1;align=center;verticalAlign=middle;spacing=0;spacingLeft=0;spacingRight=0;" vertex="1" parent="1">
+        <mxCell id="main_title" value="(a) APSR" style="shape=rectangle;fillColor=none;strokeColor=none;html=1;whiteSpace=nowrap;overflow=visible;fontFamily=Times New Roman;fontSize=10.724362;fontColor=#25343E;fontStyle=1;align=center;verticalAlign=middle;spacing=0;spacingLeft=0;spacingRight=0;" vertex="1" parent="1">
           <mxGeometry x="117.16535433070868" y="0.0" width="196.53543307086616" height="11.905511811023624" as="geometry" />
         </mxCell>
         <mxCell id="mix" value="mixture \(\mathord{\mathbf y}\)" style="shape=rectangle;fillColor=none;strokeColor=none;html=1;whiteSpace=nowrap;overflow=visible;fontFamily=Times New Roman;fontSize=10.724362;fontColor=#25343E;fontStyle=0;align=center;verticalAlign=middle;spacing=0;spacingLeft=0;spacingRight=0;" vertex="1" parent="1">

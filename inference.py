@@ -6,7 +6,7 @@ from pathlib import Path
 import soundfile as sf
 import torch
 
-from apsr import APSRP
+from apsr import APSR
 from apsr.utils.runtime import get_device, read_audio
 
 
@@ -21,7 +21,7 @@ def main():
     args = parser.parse_args()
     torch.set_num_threads(args.threads)
     device = get_device(args.device)
-    model = APSRP.from_pretrained(args.checkpoint, device)
+    model = APSR.from_pretrained(args.checkpoint, device)
     mix = read_audio(args.mixture).unsqueeze(0).to(device)
     enrollment = read_audio(args.enrollment).unsqueeze(0).to(device)
     with torch.inference_mode():

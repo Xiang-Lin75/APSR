@@ -1,4 +1,4 @@
-"""Evaluate validation-selected APSR-P checkpoints on paired target queries."""
+"""Evaluate validation-selected APSR checkpoints on paired target queries."""
 
 import argparse
 import csv
@@ -10,7 +10,7 @@ import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from apsr import APSRP
+from apsr import APSR
 from apsr.data.loading import build_dataset
 from apsr.metrics import objective as metrics
 from apsr.utils.runtime import get_device, sha256, write_json
@@ -42,7 +42,7 @@ def evaluate(
         num_workers=workers,
         collate_fn=dataset.collate_fn,
     )
-    model = APSRP.from_pretrained(checkpoint, device)
+    model = APSR.from_pretrained(checkpoint, device)
     rows = []
     seen = set()
     for idx, (mix, target, enrollment) in enumerate(
@@ -126,7 +126,7 @@ def evaluate(
         for name in metric_names
     }
     summary = dict(
-        model="APSR-P",
+        model="APSR",
         sample_rate=8000,
         num_mixtures=len(rows) // 2,
         num_queries=len(rows),

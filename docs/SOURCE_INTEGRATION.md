@@ -1,6 +1,6 @@
 # Source-equivalence verification
 
-The public package reorganizes the evaluated APSR-P research implementation into a standalone main-model package. The recorded integration checks used Python 3.13 and PyTorch/torchaudio 2.7.0+cu118 on CPU and CUDA. The historical quality benchmark used a different runtime, documented in the [model card](MODEL_CARD.md).
+The public package reorganizes the evaluated APSR research implementation into a standalone main-model package. The recorded integration checks used Python 3.13 and PyTorch/torchaudio 2.7.0+cu118 on CPU and CUDA. The historical quality benchmark used a different runtime, documented in the [model card](MODEL_CARD.md).
 
 ## Recorded checks
 
@@ -13,7 +13,7 @@ The public package reorganizes the evaluated APSR-P research implementation into
 | Dense neural MACs | Both implementations: 19,690,951,728 for a 4-s mixture and 3-s enrollment |
 | Package installation | A built wheel loaded E102 and ran inference in an isolated directory |
 
-The machine-readable report is [model_parity.json](verification/model_parity.json). Public tests cover model topology, prefix/future isolation, memory recurrence, trial pairing, RNG restoration and mixture-baseline subtraction. [GitHub Actions](https://github.com/Xiang-Lin75/APSR-P/actions/workflows/tests.yml) reports current test runs separately from these recorded integration checks.
+The machine-readable report is [model_parity.json](verification/model_parity.json). Public tests cover model topology, prefix/future isolation, memory recurrence, trial pairing, RNG restoration and mixture-baseline subtraction. [GitHub Actions](https://github.com/Xiang-Lin75/APSR/actions/workflows/tests.yml) reports current test runs separately from these recorded integration checks.
 
 ## Validation scope
 

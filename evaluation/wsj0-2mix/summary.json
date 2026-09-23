@@ -1,5 +1,5 @@
 {
-  "model": "APSR-P",
+  "model": "APSR",
   "dataset": "WSJ0-2mix",
   "sample_rate": 8000,
   "mixture_version": "min",

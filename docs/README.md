@@ -1,6 +1,6 @@
 # Documentation
 
-Start with the [quick start](../README.md#quick-start). This package includes the main APSR-P model.
+Start with the [quick start](../README.md#quick-start). This package includes the main APSR model.
 
 | Task | Guide |
 |---|---|

@@ -10,7 +10,7 @@ import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from apsr import APSRP
+from apsr import APSR
 from apsr.data.loading import build_dataset
 from apsr.losses.objective import TrainingObjective
 from apsr.losses.operators import (
@@ -88,7 +88,7 @@ def train(config, output, device, resume=None, smoke_steps=None):
     torch.manual_seed(seed)
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
-    model = APSRP()
+    model = APSR()
     initialization = Path(cfg["trainer"]["initialization"])
     if seed != 43:
         raise ValueError("The released paper-initialization recipe is seed 43")
@@ -144,7 +144,7 @@ def train(config, output, device, resume=None, smoke_steps=None):
     if resume:
         saved = torch.load(resume, map_location="cpu", weights_only=True)
         if (
-            saved.get("format") != "apsr-p-training-v1"
+            saved.get("format") not in ("apsr-training-v1", "apsr-p-training-v1")
             or saved.get("smoke_steps") != smoke_steps
         ):
             raise ValueError(
@@ -156,6 +156,10 @@ def train(config, output, device, resume=None, smoke_steps=None):
         previous_check = copy.deepcopy(previous)
         current_check["trainer"].pop("epochs")
         previous_check["trainer"].pop("epochs")
+        # The project rename does not change the numerical training recipe.
+        for recipe in (current_check, previous_check):
+            if recipe.get("model") == "APSR-P":
+                recipe["model"] = "APSR"
         if current_check != previous_check:
             raise ValueError("Resume recipe differs from saved checkpoint")
         model.load_state_dict(saved["model"])
@@ -215,7 +219,7 @@ def train(config, output, device, resume=None, smoke_steps=None):
         else:
             bad += 1
         payload = dict(
-            format="apsr-p-training-v1",
+            format="apsr-training-v1",
             model=model.state_dict(),
             optimizer=optimizer.state_dict(),
             scheduler=scheduler.state_dict(),

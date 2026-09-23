@@ -5,13 +5,13 @@
 | Field | Value |
 |---|---|
 | Task | Enrollment-conditioned target speaker extraction |
-| Implementation | `apsr.APSRP`, the main P model |
+| Implementation | `apsr.APSR`, the main P model |
 | Training data | WSJ0-2mix, 8 kHz, minimum-length mixtures |
 | Training seed / shared refinement calls | 43 / 4 |
 | Selection | Highest validation SI-SDRi, epoch 102 |
 | Validation SI-SDRi | 14.578261 dB |
 | Trainable / registered parameters | 306,842 / 312,986 |
-| Weights | `apsr_p_wsj0_2mix_r4_seed43_e102.pt` |
+| Weights | `apsr_wsj0_2mix_r4_seed43_e102.pt` |
 
 Use the [checkpoint guide](../checkpoints/README.md) to download and verify the weights. [inference_config.json](../checkpoints/inference_config.json) records the public constructor and signal settings. Source/export digests and training provenance are retained in the [full-precision summary](../evaluation/wsj0-2mix/summary.json); the source training commit belongs to the original research repository, not this public repository.
 

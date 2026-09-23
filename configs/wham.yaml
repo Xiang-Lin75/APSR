@@ -1,5 +1,5 @@
 # Official WHAM! mix_both; source rebalancing is disabled to preserve noise.
-model: APSR-P
+model: APSR
 sample_rate: 8000
 data:
   train_manifest: data/wham/tr
