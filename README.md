@@ -1,6 +1,6 @@
 # APSR
 
-**Frequency-Resolved Anchored Memory for Causal Target Speaker Extraction**
+**Frequency-Resolved Enrollment-Anchored Memory for Causal Target Speaker Extraction**
 
 [Audio demo](https://xiang-lin75.github.io/APSR/) · [Pretrained model](https://github.com/Xiang-Lin75/APSR/releases/tag/wsj0-2mix-r4-seed43-e102) · [Results](docs/MODEL_CARD.md#evaluation) · [Documentation](docs/README.md)
 

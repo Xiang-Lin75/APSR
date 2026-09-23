@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this implementation, please cite this software repository."
 type: software
-title: "APSR: Frequency-Resolved Anchored Memory for Causal Target Speaker Extraction"
+title: "APSR: Frequency-Resolved Enrollment-Anchored Memory for Causal Target Speaker Extraction"
 authors:
   - name: "APSR contributors"
 repository-code: "https://github.com/Xiang-Lin75/APSR"
